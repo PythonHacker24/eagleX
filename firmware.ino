@@ -4,7 +4,7 @@
 const char *ssid = "Coolest Wi-Fi to connect";
 const char *password = "anonymous";
 
-int ledPin = D1;  // Replace with the pin connected to your LED
+int ledPin = D1;  
 int fadeAmount = 5;
 
 ESP8266WebServer server(80);
@@ -26,9 +26,7 @@ void setup() {
   Serial.println(WiFi.localIP());
   server.begin();
 
-  // Define the endpoint to receive sound values
   server.on("/sound", HTTP_POST, []() {
-      // Retrieve sound values from the request and adjust LED fading
       int soundValue = (server.arg("value")).toFloat();
       analogWrite(ledPin, static_cast<int>(soundValue));
       Serial.println(soundValue);
